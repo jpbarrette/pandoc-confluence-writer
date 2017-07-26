@@ -13,6 +13,9 @@
 
 local image_index = 0
 
+-- Table to store footnotes, so they can be included at the end.
+local notes = {}
+
 -- Character escaping
 local function escape(s, in_attribute)
    return s:gsub("[<>&\"']",
@@ -61,6 +64,11 @@ function Doc(body, metadata, variables)
       table.insert(buffer, s)
    end
    add(body)
+   if #notes > 0 then
+      for _,note in pairs(notes) do
+          add("*" .. note)
+      end
+  end
    return table.concat(buffer,'\n')
 end
 
@@ -146,7 +154,9 @@ end
 function BulletList(items)
    local buffer = {}
    for _, item in pairs(items) do
-      table.insert(buffer, "* " .. item .. "")
+      for line in string.gmatch(item, '([^\n]+)') do
+         table.insert(buffer, "*" .. line .. "\n")
+      end
    end
    return "\n" .. table.concat(buffer, "") .. "\n"
 end
@@ -154,9 +164,11 @@ end
 function OrderedList(items)
    local buffer = {}
    for _, item in pairs(items) do
-      table.insert(buffer, "# " .. item .. "")
+      for line in string.gmatch(item, '([^\n]+)') do
+         table.insert(buffer, "#" .. line .. "\n")
+      end
    end
-   return "\n" .. table.concat(buffer, "") .. "\n"
+   return "\n" .. table.concat(buffer, "\n") .. "\n"
 end
 
 -- Caption is a string, aligns is an array of strings,
@@ -183,6 +195,20 @@ function Table(caption, aligns, widths, headers, rows)
    end
    return "\n" .. table.concat(buffer,'\n') .. "\n"
 end
+
+
+function Note(s)
+  local num = #notes + 1
+  -- insert the back reference right before the final closing tag.
+  s = string.gsub(s,
+          '(.*)</', '%1 <a href="#fnref' .. num ..  '">&#8617;</a></')
+  -- add a list item with the note to the note table.
+  table.insert(notes, '<li id="fn' .. num .. '">' .. s .. '</li>')
+  -- return the footnote reference, linked to the note.
+  return '<a id="fnref' .. num .. '" href="#fn' .. num ..
+            '"><sup>' .. num .. '</sup></a>'
+end
+
 
 
 -- The following code will produce runtime warnings when you haven't defined
