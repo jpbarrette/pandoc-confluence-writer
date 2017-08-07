@@ -129,7 +129,7 @@ function SmallCaps(s)
 end
 
 function Strikeout(s)
-  return '<del>' .. s .. '</del>'
+  return '<span style="text-decoration: line-through;">' .. s .. '</span>'
 end
 
 function Link(s, src, tit, attr)
@@ -330,6 +330,10 @@ end
 
 function Div(s, attr)
   return "<div" .. attributes(attr) .. ">\n" .. s .. "</div>"
+end
+
+function DoubleQuoted(s)
+  return "&laquo;" .. s .. "&raquo;"
 end
 
 -- The following code will produce runtime warnings when you haven't defined

@@ -14,3 +14,18 @@ then copy wiki.put the file in that directory\templates\default.confluence.lua
 ### NOTES
 
 Look at https://github.com/mfenner/pandoc-jats/blob/master/sample.lua (footnotes)
+
+
+https://github.com/jgm/pandoc/blob/master/data/pandoc.lua
+
+
+In fact, put in into confluence storage format!
+
+https://confluence.atlassian.com/doc/confluence-storage-format-790796544.html#ConfluenceStorageFormat-Lists
+
+(start from sample.lua)
+
+
+# TODO
+
+* Better Handling of images (attached or not)
