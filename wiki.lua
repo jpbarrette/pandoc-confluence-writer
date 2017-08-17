@@ -133,8 +133,13 @@ function Strikeout(s)
 end
 
 function Link(s, src, tit, attr)
-  return "<a href='" .. escape(src,true) .. "' title='" ..
-         escape(tit,true) .. "'>" .. s .. "</a>"
+  if src and string.sub(src, 1, 1) == "#" then
+    -- [Anchor Link](#anchor), taken from https://confluence.atlassian.com/doc/confluence-storage-format-790796544.html#ConfluenceStorageFormat-Links
+    return LinkToAnchor(escape(string.sub(src, 2, -1), true), s)
+  else
+    return "shit" .. string.sub(src, 0, 1) .. src .. "<a href='" .. escape(src,true) .. "' title='" ..
+           escape(tit,true) .. "'>" .. s .. "</a>"
+  end
 end
 
 function Image(s, src, tit, attr)
@@ -201,7 +206,20 @@ end
 
 -- lev is an integer, the header level.
 function Header(lev, s, attr)
-  return "<h" .. lev .. attributes(attr) ..  ">" .. s .. "</h" .. lev .. ">"
+
+  local attr_table = {}
+  local prefix = ""
+  for x,y in pairs(attr) do
+    if y and y ~= "" then
+      if x == "id" then
+        prefix = prefix .. AnchorRef(y)
+      else
+        attr_table[x] = y
+      end
+    end
+  end
+
+  return prefix .. "<h" .. lev .. attributes(attr_table) ..  ">" .. s .. "</h" .. lev .. ">"
 end
 
 function BlockQuote(s)
