@@ -25,7 +25,10 @@ https://confluence.atlassian.com/doc/confluence-storage-format-790796544.html#Co
 
 (start from sample.lua)
 
+https://stackoverflow.com/questions/6345948/css-for-specific-text-on-confluence
+
 
 # TODO
 
 * Better Handling of images (attached or not)
+* Trying to fix footnotes's link which is after a paragraph annotation (link is one line down).

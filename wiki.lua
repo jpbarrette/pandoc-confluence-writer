@@ -154,16 +154,20 @@ function DisplayMath(s)
   return "\\[" .. escape(s) .. "\\]"
 end
 
+function AnchorRef(anchorName)
+  return '<ac:structured-macro ac:name="anchor"><ac:parameter ac:name="">'.. anchorName .. '</ac:parameter></ac:structured-macro>'
+end
+
+function LinkToAnchor(anchorName, text)
+  return '<ac:link ac:anchor="' .. anchorName .. '"><ac:link-body>' .. text .. '</ac:link-body></ac:link>'
+end
+
 function Note(s)
   local num = #notes + 1
-  -- insert the back reference right before the final closing tag.
-  s = string.gsub(s,
-          '(.*)</', '%1 <a href="#fnref' .. num ..  '">&#8617;</a></')
-  -- add a list item with the note to the note table.
-  table.insert(notes, '<li id="fn' .. num .. '">' .. s .. '</li>')
+  -- add a list item with the note to t[he note table.
+  table.insert(notes, '<li>' .. AnchorRef("fn" .. num) .. s .. LinkToAnchor('fnref' .. num, '&#8617;') .. '</li>')
   -- return the footnote reference, linked to the note.
-  return '<a id="fnref' .. num .. '" href="#fn' .. num ..
-            '"><sup>' .. num .. '</sup></a>'
+  return '<sup>' .. AnchorRef('fnref' .. num) .. LinkToAnchor('fn' .. num, num) .. '</sup>'
 end
 
 function Span(s, attr)
