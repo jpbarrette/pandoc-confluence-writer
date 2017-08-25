@@ -351,7 +351,16 @@ function RawBlock(format, str)
 end
 
 function Div(s, attr)
-  return "<div" .. attributes(attr) .. ">\n" .. s .. "</div>"
+  local div_text = [[
+<ac:structured-macro ac:macro-id="57855606-2855-47df-ac05-f2cb358f1e23" ac:name="div" ac:schema-version="1">]]
+  for x,y in pairs(attr) do
+    if y and y ~= "" then
+       div_text = div_text .. string.format('  <ac:parameter ac:name="%s">%s</ac:parameter>', x, y)
+    end
+  end
+
+  div_text = div_text .. string.format('  <ac:rich-text-body>%s</ac:rich-text-body>\n</ac:structured-macro>', s)
+  return div_text
 end
 
 function DoubleQuoted(s)
