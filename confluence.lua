@@ -76,6 +76,17 @@ function Doc(body, metadata, variables)
   local function add(s)
     table.insert(buffer, s)
   end
+  local css_style = [[
+<ac:structured-macro ac:macro-id="b7c0ac99-8feb-49c2-858c-870cd55df16b" ac:name="html" ac:schema-version="1">'
+    <ac:parameter ac:name="atlassian-macro-output-type">INLINE</ac:parameter>
+    <ac:plain-text-body>
+    <![CDATA[
+ <style>
+#captioned-image {
+    text-align: center;
+}]] ..
+    "</style>]]></ac:plain-text-body></ac:structured-macro>"
+  add(css_style)
   add(body)
   if #notes > 0 then
     add('<ol class="footnotes">')

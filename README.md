@@ -32,3 +32,8 @@ https://stackoverflow.com/questions/6345948/css-for-specific-text-on-confluence
 
 * Better Handling of images (attached or not)
 * Trying to fix footnotes's link which is after a paragraph annotation (link is one line down).
+* Adding configurable CSS stylesheet
+
+# CSS for image caption
+
+https://bitbucket.org/ryanackley/confluence-image-captions/wiki/Home
