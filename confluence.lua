@@ -301,10 +301,26 @@ function html_align(align)
   end
 end
 
+
+
+function table.shallow_copy(t)
+  local t2 = {}
+  for k,v in pairs(t) do
+    t2[k] = v
+  end
+  return t2
+end
+
+
 function CaptionedImage(src, tit, caption, attr)
-   return '<div class="figure">\n<img src="' .. escape(src,true) ..
-      '" title="' .. escape(tit,true) .. '"/>\n' ..
-      '<p class="caption">' .. caption .. '</p>\n</div>'
+   local prefix = ""
+   if attr and attr['id'] ~= "" then
+      prefix = AnchorRef(attr['id'])
+   end
+
+   attr_cpy = table.shallow_copy(attr)
+   attr_cpy['id'] = "captioned-image"
+   return Div('<table><tbody><tr><td><ac:image><ri:attachment ri:filename="' .. escape(src,true) .. '" /></ac:image></td></tr><tr><td>' .. escape(caption) .. '</td></tr></tbody></table>', attr_cpy)
 end
 
 -- Caption is a string, aligns is an array of strings,
