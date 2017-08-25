@@ -137,7 +137,7 @@ function Link(s, src, tit, attr)
     -- [Anchor Link](#anchor), taken from https://confluence.atlassian.com/doc/confluence-storage-format-790796544.html#ConfluenceStorageFormat-Links
     return LinkToAnchor(escape(string.sub(src, 2, -1), true), s)
   else
-    return "shit" .. string.sub(src, 0, 1) .. src .. "<a href='" .. escape(src,true) .. "' title='" ..
+    return string.sub(src, 0, 1) .. src .. "<a href='" .. escape(src,true) .. "' title='" ..
            escape(tit,true) .. "'>" .. s .. "</a>"
   end
 end
