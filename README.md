@@ -1,6 +1,6 @@
 # Installation
 
-Just download the file JATS.lua and put it in a convenient location. Pandoc includes a lua interpreter, so lua need not be installed separately. You need at least Pandoc version 1.13, released August 2014 (this release adds --template support for custom writers).
+Just download the file `confluence.lua` and put it in a convenient location. Pandoc includes a lua interpreter, so lua need not be installed separately. You need at least Pandoc version 1.13, released August 2014 (this release adds --template support for custom writers).
 
 # Usage
 
