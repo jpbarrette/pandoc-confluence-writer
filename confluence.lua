@@ -378,16 +378,30 @@ function RawBlock(format, str)
 end
 
 function Div(s, attr)
-  local div_text = [[
+  if attr.class and (attr.class == 'note' or attr.class == 'warning' or attr.class == 'info') then
+     return string.format([[<ac:structured-macro
+  ac:name="%s"
+  ac:schema-version="1"
+  ac:macro-id="0b7b2863-692e-471e-b80b-94b6e4e5ba13">
+    <ac:rich-text-body>
+      %s
+    </ac:rich-text-body>
+  </ac:structured-macro>]],
+attr.class, s)
+  elseif attr.class and attr.class ~= 'admonition-title' then
+     local div_text = [[
 <ac:structured-macro ac:macro-id="57855606-2855-47df-ac05-f2cb358f1e23" ac:name="div" ac:schema-version="1">]]
-  for x,y in pairs(attr) do
-    if y and y ~= "" then
-       div_text = div_text .. string.format('  <ac:parameter ac:name="%s">%s</ac:parameter>', x, y)
-    end
-  end
+     for x,y in pairs(attr) do
+        if y and y ~= "" then
+           div_text = div_text .. string.format('  <ac:parameter ac:name="%s">%s</ac:parameter>', x, y)
+        end
+     end
 
-  div_text = div_text .. string.format('  <ac:rich-text-body>%s</ac:rich-text-body>\n</ac:structured-macro>', s)
-  return div_text
+     div_text = div_text .. string.format('  <ac:rich-text-body>%s</ac:rich-text-body>\n</ac:structured-macro>', s)
+     return div_text
+  else
+     return ""
+  end
 end
 
 function DoubleQuoted(s)
