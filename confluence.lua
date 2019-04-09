@@ -377,17 +377,17 @@ function RawBlock(format, str)
   end
 end
 
+function isNoteWarningOrInfo(class)
+   class_lc = class:lower()
+   return class_lc == "note" or class_lc == "warning" or class_lc == "info"
+end
+
 function Div(s, attr)
-  if attr.class and (attr.class == 'note' or attr.class == 'warning' or attr.class == 'info') then
-     return string.format([[<ac:structured-macro
-  ac:name="%s"
-  ac:schema-version="1"
-  ac:macro-id="0b7b2863-692e-471e-b80b-94b6e4e5ba13">
-    <ac:rich-text-body>
-      %s
-    </ac:rich-text-body>
-  </ac:structured-macro>]],
-attr.class, s)
+  if attr.class and isNoteWarningOrInfo(attr.class) then
+     return string.format('<ac:structured-macro ac:name="%s" ac:schema-version="1" '..
+                             'ac:macro-id="0b7b2863-692e-471e-b80b-94b6e4e5ba13">'..
+                             '<ac:rich-text-body>%s</ac:rich-text-body></ac:structured-macro>',
+                          attr.class:lower(), s)
   elseif attr.class and attr.class ~= 'admonition-title' then
      local div_text = [[
 <ac:structured-macro ac:macro-id="57855606-2855-47df-ac05-f2cb358f1e23" ac:name="div" ac:schema-version="1">]]
