@@ -28,8 +28,8 @@ In fact, put in into confluence storage format!
 
 ## TODO
 
-* Better Handling of images (attached or not)
-* Trying to fix footnotes's link which is after a paragraph annotation (link is one line down).
+* Better handling of images (attached or not)
+* Trying to fix footnote's link which is after a paragraph annotation (link is one line down).
 * Adding configurable CSS stylesheet
 
 ## CSS for image caption
