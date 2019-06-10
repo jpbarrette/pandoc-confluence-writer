@@ -14,17 +14,17 @@ then copy wiki.put the file in that directory\templates\default.confluence.lua
 
 ## NOTES
 
-Look at https://github.com/mfenner/pandoc-jats/blob/master/sample.lua (footnotes)
+Look at <https://github.com/mfenner/pandoc-jats/blob/master/sample.lua> (footnotes)
 
-https://github.com/jgm/pandoc/blob/master/data/pandoc.lua
+<https://github.com/jgm/pandoc/blob/master/data/pandoc.lua>
 
 In fact, put in into confluence storage format!
 
-https://confluence.atlassian.com/doc/confluence-storage-format-790796544.html#ConfluenceStorageFormat-Lists
+<https://confluence.atlassian.com/doc/confluence-storage-format-790796544.html#ConfluenceStorageFormat-Lists>
 
 (start from sample.lua)
 
-https://stackoverflow.com/questions/6345948/css-for-specific-text-on-confluence
+<https://stackoverflow.com/questions/6345948/css-for-specific-text-on-confluence>
 
 ## TODO
 
@@ -34,4 +34,4 @@ https://stackoverflow.com/questions/6345948/css-for-specific-text-on-confluence
 
 ## CSS for image caption
 
-https://bitbucket.org/ryanackley/confluence-image-captions/wiki/Home
+<https://bitbucket.org/ryanackley/confluence-image-captions/wiki/Home>
