@@ -362,7 +362,7 @@ function Table(caption, aligns, widths, headers, rows)
     add("</tr>")
   end
   add("</tbody>")
-  add("</table")
+  add("</table>")
   return table.concat(buffer, "\n")
 end
 
