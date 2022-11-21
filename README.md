@@ -28,11 +28,15 @@ https://confluence.atlassian.com/doc/confluence-storage-format-790796544.html#Co
 https://stackoverflow.com/questions/6345948/css-for-specific-text-on-confluence
 
 
+https://docs.atlassian.com/confluence/REST/latest-server/#content/{id}/child/attachment-createAttachments
+https://www.emacswiki.org/emacs/ConfluenceMode
+
 # TODO
 
 * Better Handling of images (attached or not)
 * Trying to fix footnotes's link which is after a paragraph annotation (link is one line down).
 * Adding configurable CSS stylesheet
+* SingleQuoted is missing
 
 # CSS for image caption
 

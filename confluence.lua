@@ -84,12 +84,19 @@ function Doc(body, metadata, variables)
  <style>
 #captioned-image {
     text-align: center;
-}]] ..
+}
+/* This is to make sure footnotes' addition <p> element isn't taken into consideration */
+.footnotes li p {
+    margin: 0;
+    padding: 0;
+    display: inline;
+}
+]] ..
     "</style>]]></ac:plain-text-body></ac:structured-macro>"
   add(css_style)
   add(body)
   if #notes > 0 then
-    add('<ol class="footnotes">')
+    add('<h1>Footnotes</h1><ol class="footnotes">')
     for _,note in pairs(notes) do
       add(note)
     end
@@ -148,7 +155,7 @@ function Link(s, src, tit, attr)
     -- [Anchor Link](#anchor), taken from https://confluence.atlassian.com/doc/confluence-storage-format-790796544.html#ConfluenceStorageFormat-Links
     return LinkToAnchor(escape(string.sub(src, 2, -1), true), s)
   else
-    return string.sub(src, 0, 1) .. src .. "<a href='" .. escape(src,true) .. "' title='" ..
+    return "<a href='" .. escape(src,true) .. "' title='" ..
            escape(tit,true) .. "'>" .. s .. "</a>"
   end
 end
@@ -388,6 +395,10 @@ function Div(s, attr)
 
   div_text = div_text .. string.format('  <ac:rich-text-body>%s</ac:rich-text-body>\n</ac:structured-macro>', s)
   return div_text
+end
+
+function SingleQuoted(s)
+  return "&apos;" .. s .. "&apos;"
 end
 
 function DoubleQuoted(s)
